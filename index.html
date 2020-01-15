@@ -67,16 +67,17 @@
 
     <!-- Input own weight-->
     <hr>
-    <div class="col-xs-6 col-xs-offset-4" style="font-size: 52px">
-        <span  style="font-size: 72px">Input body-weight</span>
+    <div class="col-xs-6 col-xs-offset-4" style="font-size: 48px">
+        <span  style="font-size: 62px">Input body-weight</span>
 
-        <p>
+        <p style="font-size: 48px">
             <span id="span_currentTime"></span>
             <script>
                 let {year, month, day, hour, min} = getCurrentTime();
                 rIDv("span_currentTime").innerHTML = "【現在】" +year + "年 " + month + "月 " + day + "日 " + hour + "時 " + min + "分 ";
             </script>
-
+        </p>
+        <p style="font-size: 48px">
             &ensp;&ensp;<span> 体重 </span>
             <input type="text" value="" placeholder="00.00" id="weight_temp" size="2" name="weight_temp" style="text-align: right;">
             <span>kg</span>
@@ -190,6 +191,8 @@
                 pointHighlightStroke : "red",    // マウスが載った際のドットの枠線色
                 data : data_y      // 各点の値
             }]
+
+
         }
 
         return lineChartData;
