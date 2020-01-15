@@ -22,7 +22,7 @@
     </script>
 
     <!-- LogIn -->
-    <div class="form-wrapper col-xs-6 col-xs-offset-2">
+    <div class="form-wrapper col-xs-6 col-xs-offset-2" style="font-size: 36px">
         <h3>Sign In</h3>
         <form>
             <div class="form-item">
@@ -67,16 +67,15 @@
 
     <!-- Input own weight-->
     <br>
-    <div class="col-xs-6 col-xs-offset-4" >
+    <div class="col-xs-6 col-xs-offset-4" style="font-size: 36px">
         <h3>Input body-weight</h3>
         <p>
             <span id="span_currentTime"></span>
             <script>
                 let {year, month, day, hour, min} = getCurrentTime();
-                rIDv("span_currentTime").innerHTML = "【現在】 " +year + "年 " + month + "月 " + day + "日 " + hour + "時 " + min + "分 ";
+                rIDv("span_currentTime").innerHTML = "【現在】" +year + "年 " + month + "月 " + day + "日 " + hour + "時 " + min + "分 ";
             </script>
-        </p>
-        <p>
+
             &ensp;&ensp;<span> 体重 </span>
             <input type="text" value="" placeholder="00.00" id="weight_temp" size="2" name="weight_temp" style="text-align: right;">
             <span>kg</span>
@@ -87,7 +86,7 @@
     <hr>
 
     <!-- Make Graph -->
-    <div class="col-xs-10 col-xs-offset-1">
+    <div class="col-xs-10 col-xs-offset-1" style="font-size: 24px">
         <canvas id="graph-area" height="300" width="400">
             ※表示にはcanvas要素を解釈可能なブラウザが必要です。
         </canvas>
@@ -95,8 +94,8 @@
 
     <!-- Result Table -->
     <hr>
-    <div class="col-xs-10 col-xs-offset-1">
-        <table id="table_result" class="table table-hover table-bordered table-striped fixheader" style="text-align: center;">
+    <div class="col-xs-9 col-xs-offset-2">
+        <table id="table_result" class="table table-hover table-bordered table-striped fixheader" style="text-align: center; font-size: 36px">
             <thead>
                 <tr>
                     <td>No</td>
@@ -215,6 +214,8 @@
     </select>
 </body>
 </html>
+
+
 
 
 
