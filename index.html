@@ -102,16 +102,16 @@
 
     <!-- Make Graph -->
     <div class="col-xs-8 col-xs-offset-2" style="font-size: 36px">
-        <canvas id="graph-area" height="300" width="1000" style="font-size: 36px" class="col-xs-8 col-xs-offset-2">
+        <canvas id="graph-area" height="400" width="800" style="font-size: 36px" class="col-xs-6 col-xs-offset-1">
             ※表示にはcanvas要素を解釈可能なブラウザが必要です。
         </canvas>
     </div>
 
     <!-- Result Table -->
     <hr>
-    <div class="col-xs-9 col-xs-offset-2">
-        <table id="table_result" class="table tablesorter tablesorter-green" style="text-align: center; font-size: 36px">
-            <thead>
+    <div class="col-xs-9 col-xs-offset-2" style="text-align: center; font-size: 18px">
+        <table id="table_result" class="table tablesorter" style="text-align: center; font-size: 24px;">
+            <thead >
                 <tr>
                     <td>No</td>
                     <td>名前</td>
@@ -125,7 +125,7 @@
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody >
                 <tr>
                     <td>1</td>
                     <td>松井</td>
@@ -172,6 +172,14 @@
                 </tr>
             </tbody>
         </table>
+
+        <script>
+        <!--
+        jQuery( function() {
+            jQuery( '#table_result' ) . tablesorter();
+        } );
+        // -->
+        </script>
 
         <!-- Get Table SentData -->
         <script>
