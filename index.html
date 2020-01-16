@@ -4,13 +4,22 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- jquery  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://unpkg.com/popper.js"></script>
-    <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+    -
+    <!-- bootstrap  -->
+    <script src="js/bootstrap.min.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Canvas  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js" type="text/javascript"></script>
+
+    <!-- Table  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/css/theme.green.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/css/theme.default.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/js/jquery.tablesorter.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/js/jquery.tablesorter.widgets.min.js"></script>
 
 
 </head>
@@ -20,6 +29,10 @@
     <script>
         function rIDv(id) { return document.getElementById(id); } // ReturnIDValue
     </script>
+
+    <!-- Trial -->
+
+
 
     <!-- LogIn -->
     <div class="form-wrapper col-xs-6 col-xs-offset-2" style="font-size: 48px">
@@ -88,8 +101,8 @@
     <hr>
 
     <!-- Make Graph -->
-    <div class="col-xs-10 col-xs-offset-1" style="font-size: 36px">
-        <canvas id="graph-area" height="300" width="400" style="font-size: 36px">
+    <div class="col-xs-8 col-xs-offset-2" style="font-size: 36px">
+        <canvas id="graph-area" height="300" width="1000" style="font-size: 36px" class="col-xs-8 col-xs-offset-2">
             ※表示にはcanvas要素を解釈可能なブラウザが必要です。
         </canvas>
     </div>
@@ -97,7 +110,7 @@
     <!-- Result Table -->
     <hr>
     <div class="col-xs-9 col-xs-offset-2">
-        <table id="table_result" class="table table-hover table-bordered table-striped fixheader" style="text-align: center; font-size: 36px">
+        <table id="table_result" class="table tablesorter tablesorter-green" style="text-align: center; font-size: 36px">
             <thead>
                 <tr>
                     <td>No</td>
@@ -112,96 +125,145 @@
                 </tr>
             </thead>
 
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>松井</td>
+                    <td>19</td>
+                    <td>12</td>
+                    <td>11</td>
+                    <td>08</td>
+                    <td>12</td>
+                    <td>77.62</td>
+                    <td>X</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>松井</td>
+                    <td>19</td>
+                    <td>12</td>
+                    <td>14</td>
+                    <td>09</td>
+                    <td>32</td>
+                    <td>78.62</td>
+                    <td>X</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>松井</td>
+                    <td>19</td>
+                    <td>12</td>
+                    <td>28</td>
+                    <td>07</td>
+                    <td>02</td>
+                    <td>80.62</td>
+                    <td>X</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>松井</td>
+                    <td>20</td>
+                    <td>01</td>
+                    <td>05</td>
+                    <td>09</td>
+                    <td>00</td>
+                    <td>82.99</td>
+                    <td>X</td>
+                </tr>
+            </tbody>
         </table>
-    </div>
 
-    <!-- Get Table SentData -->
-    <script>
-    var player_No = 1;
-    var player_Name = "松井";  var weight;
-    var table = rIDv("table_result");
+        <!-- Get Table SentData -->
+        <script>
+        var player_No = 1;
+        var player_Name = "松井";  var weight;
+        var table = rIDv("table_result");
 
-    ////////// Main //////////
-    rIDv("btn_weight").onclick = function(){ addDataToTable(); window.myLine = new Chart(ctx).Line(getTableData()); };
+        ////////// Main //////////
+        rIDv("btn_weight").onclick = function(){ addDataToTable(); window.myLine = new Chart(ctx).Line(getTableData()); };
 
-    // Created Valuable
-    var btn_delete = '<input type="button" value="D" onclick="deleteRow(this)" />';
-    function deleteRow(obj) { tr = obj.parentNode.parentNode;
-                              tr.parentNode.deleteRow(tr.sectionRowIndex);
-                              window.myLine = new Chart(ctx).Line(getTableData());
-                              }
+        // Created Valuable
+        var btn_delete = '<input type="button" value="D" onclick="deleteRow(this)" />';
+        function deleteRow(obj) { tr = obj.parentNode.parentNode;
+                                  tr.parentNode.deleteRow(tr.sectionRowIndex);
+                                  window.myLine = new Chart(ctx).Line(getTableData());
+                                  }
 
-    function inputValueToCell(Row, CellNo, Value) { Row.insertCell(CellNo).innerHTML = Value; }
-    function addDataToTable() {
-        let {year, month, day, hour, min} = getCurrentTime();
-        weight = parseFloat(rIDv("weight_temp").value);
-        let row_new = table.insertRow(-1);
-        let array_result = [player_No, player_Name, year, month, day, hour, min, weight, btn_delete];
-        for( var i=0; i<array_result.length; i++ ){ inputValueToCell(row_new, -1, array_result[i]); }
-    }
+        function inputValueToCell(Row, CellNo, Value) { Row.insertCell(CellNo).innerHTML = Value; }
+        function addDataToTable() {
+            let {year, month, day, hour, min} = getCurrentTime();
+            weight = parseFloat(rIDv("weight_temp").value);
+            let row_new = table.insertRow(-1);
+            let array_result = [player_No, player_Name, year, month, day, hour, min, weight, btn_delete];
+            for( var i=0; i<array_result.length; i++ ){ inputValueToCell(row_new, -1, array_result[i]); }
+        }
+
+        $(document).ready(function() { $("#table_result").tablesorter(); } );
+
+
+        </script>
+
+        <!-- Make Graph -->
+        <script type="text/javascript">
+        // Setting: Table
+        var table_result = document.getElementById("table_result");
+
+        // Setting: Canvas
+        var ctx = document.getElementById("graph-area").getContext("2d");
+        var rgba_gray = "rgba(92,220,92,0.2)";
+        var rgba_green = "rgba(92,220,92,1)";
+
+        function getTableData(){
+            var num_row = table_result.rows.length;
+            var num_col = table_result.rows[0].cells.length;  //全行を取得
+
+            let data_x = []; let data_y = [];
+            let past_x; let count = 1;
+            for( var i=1; i<num_row; i++ ){
+                let r_t = table_result.rows[i]; // r_t = row_temp
+
+                // let x_temp_array = [];
+                // let dateUnit_array = ["年", "月", "日",];
+                // for( var j=0; j<dateUnit_array.length; j++ ){ x_temp_array.push(r_t.cells[j+2].innerHTML + dateUnit_array[j]); }
+                // let x_temp = x_temp_array.join('');
+
+                let year_month = r_t.cells[3].innerHTML + "/" + r_t.cells[4].innerHTML;
+                let x_temp;
+                if (year_month == past_x) { count++; x_temp = year_month + "(" + count + ")"; }
+                else { count = 1; x_temp = year_month; }
+                past_x = year_month;
+
+                let y_temp = parseFloat(r_t.cells[7].innerHTML);
+                data_x.push(x_temp); data_y.push(y_temp);
+            }
+
+            console.log("END: ", data_x, data_y);
+
+            var lineChartData = {
+                labels : data_x,
+                datasets : [ {
+                    label: "緑データ",
+                    fillColor : rgba_gray, // 線から下端までを塗りつぶす色
+                    strokeColor : rgba_green, // 折れ線の色
+                    pointColor : rgba_green,  // ドットの塗りつぶし色
+
+                    pointStrokeColor : "white",        // ドットの枠線色
+                    pointHighlightFill : "yellow",     // マウスが載った際のドットの塗りつぶし色
+                    pointHighlightStroke : "red",    // マウスが載った際のドットの枠線色
+                    data : data_y      // 各点の値
+                }]
+
+
+            }
+
+            return lineChartData;
+        }
+
+
+
 
     </script>
-
-    <!-- Make Graph -->
-    <script type="text/javascript">
-    // Setting: Table
-    var table_result = document.getElementById("table_result");
-
-    // Setting: Canvas
-    var ctx = document.getElementById("graph-area").getContext("2d");
-    var rgba_gray = "rgba(92,220,92,0.2)";
-    var rgba_green = "rgba(92,220,92,1)";
-
-    function getTableData(){
-        var num_row = table_result.rows.length;
-        var num_col = table_result.rows[0].cells.length;  //全行を取得
-
-        let data_x = []; let data_y = [];
-        let past_x; let count = 1;
-        for( var i=1; i<num_row; i++ ){
-            let r_t = table_result.rows[i]; // r_t = row_temp
-
-            // let x_temp_array = [];
-            // let dateUnit_array = ["年", "月", "日",];
-            // for( var j=0; j<dateUnit_array.length; j++ ){ x_temp_array.push(r_t.cells[j+2].innerHTML + dateUnit_array[j]); }
-            // let x_temp = x_temp_array.join('');
-
-            let year_month = r_t.cells[3].innerHTML + "/" + r_t.cells[4].innerHTML;
-            let x_temp;
-            if (year_month == past_x) { count++; x_temp = year_month + "(" + count + ")"; }
-            else { count = 1; x_temp = year_month; }
-            past_x = year_month;
-
-            let y_temp = parseFloat(r_t.cells[7].innerHTML);
-            data_x.push(x_temp); data_y.push(y_temp);
-        }
-
-        console.log("END: ", data_x, data_y);
-
-        var lineChartData = {
-            labels : data_x,
-            datasets : [ {
-                label: "緑データ",
-                fillColor : rgba_gray, // 線から下端までを塗りつぶす色
-                strokeColor : rgba_green, // 折れ線の色
-                pointColor : rgba_green,  // ドットの塗りつぶし色
-
-                pointStrokeColor : "white",        // ドットの枠線色
-                pointHighlightFill : "yellow",     // マウスが載った際のドットの塗りつぶし色
-                pointHighlightStroke : "red",    // マウスが載った際のドットの枠線色
-                data : data_y      // 各点の値
-            }]
-
-
-        }
-
-        return lineChartData;
-    }
-
-
-
-
-</script>
+    </div>
 
     <!-- OnLoadFunction -->
     <script>
@@ -211,7 +273,7 @@
     </script>
 
     <!-- 備考 -->
-    <select name="example">
+    <select name="example" hidden>
         <option value="サンプル1">サンプル1</option>
         <option value="サンプル2">サンプル2</option>
         <option value="サンプル3">サンプル3</option>
